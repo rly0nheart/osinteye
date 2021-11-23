@@ -7,6 +7,8 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/rlyonheart/osinteye?style=flat&logo=github)
 
 A 👥user 🔎reconnaisance tool that extracts a ⭕target's information from Instagram, DockerHub &amp; Github. Also 🔎searches for matching usernames on Github.
+![osinteye](https://user-images.githubusercontent.com/74001397/143137199-d3545457-7b78-48d5-9d9d-e6d2623b4a47.gif)
+
 
 # Features
 * extracts Instagram info
