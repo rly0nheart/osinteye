@@ -2,6 +2,7 @@
 ![OS](https://img.shields.io/badge/OS-GNU%2FLinux-red?style=flat&logo=linux)
 ![GitHub](https://img.shields.io/github/license/rlyonheart/osinteye?style=flat&logo=github)
 ![CodeFactor](https://www.codefactor.io/repository/github/rlyonheart/osinteye/badge)
+![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/rlyonheart/osinteye?style=flat&logo=pypi)
 ![Lines of code](https://img.shields.io/tokei/lines/github/rlyonheart/osinteye?style=flat&logo=github)
 ![GitHub repo size](https://img.shields.io/github/repo-size/rlyonheart/osinteye?style=flat&logo=github)
 
