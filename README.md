@@ -50,12 +50,12 @@ chmod +x osinteye
 
 **Example .1**;
 ```
-python osinteye --instagram johndoe
+python osinteye -v --instagram johndoe
 ```
 
 **Example .2**;
 ```
-./osinteye --instagram johndoe
+./osinteye -v --instagram johndoe
 ```
 
 # Available Sources
@@ -74,8 +74,8 @@ python osinteye --instagram johndoe
 | Flag         | Usage|
 | ------------- |:---------:|
 | <code>-sG/--github-search</code> | *search username on Github* |
-| <code>-r/--raw</code> | *return output in raw json format*  |
-| <code>-v/--verbose</code>  | *run osintEye in verbose mode (returns network logs, errors and warnings)*  |
+| <code>-r/--raw</code> | *[OPTIONAL] return output in raw json format*  |
+| <code>-v/--verbose</code>  | *[RECOMMENDED] run osintEye in verbose mode (returns network logs, errors and warnings)*  |
 
 
 # Disclaimer
