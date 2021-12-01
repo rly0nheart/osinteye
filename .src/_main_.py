@@ -13,7 +13,7 @@ from colors import red,green,white,reset
 class osintEye:
 	def __init__(self,args):
 		self.session = requests.session()
-		self.session.headers = {'User-Agent': random.choice(user_agents)}
+		self.session.headers = {"User-Agent": f"{random.choice(user_agents)}"}
 		
 	def main(self):
 		if args.instagram:
@@ -40,10 +40,10 @@ class osintEye:
 		if args.raw:
 			pprint(response['graphql']['user'])
 		else:
-		    info = {'Profile photo': user['profile_pic_url_hd'],
+		    info = {'Profile photo': self.urlshortener(user['profile_pic_url_hd']),
 		            'Username': user['username'],
 		            'User ID': user['id'],
-		            'External URL': user['external_url'],
+		            'External URL': self.urlshortener(user['external_url']),
 		            'Bio': user['biography'],
 		            'Followers': user['edge_followed_by']['count'],
 		            'Following': user['edge_follow']['count'],
@@ -63,7 +63,9 @@ class osintEye:
 		    print(f"\n{white}{user['full_name']} ({green}Instagram{white}){reset}")
 		    for key, value in info.items():
 		    	print(f"{white}├─ {key}: {green}{value}{reset}")
+		    print("\n")
 		    	
+		    
 	
 	# Getting github profile information    	
 	def github(self):
@@ -74,7 +76,7 @@ class osintEye:
 	    if args.raw:
 	    	pprint(response)
 	    else:
-	        info = {'Profile photo': response['avatar_url'],
+	        info = {'Profile photo': self.urlshortener(response['avatar_url']),
 	                'Username': response['login'],
 	                'User ID': response['id'],
 	                'Node ID': response['node_id'],
@@ -95,6 +97,7 @@ class osintEye:
 	        print(f"\n{white}{response['name']} ({green}Github{white}){reset}")
 	        for key,value in info.items():
 	            print(f"{white}├─ {key}: {green}{value}{reset}")
+	        print("\n")
 	        
 	        # Followers
 	        print(f"\n{white}[{green}*{white}] Fetching @{green}{args.username}{white}' Github followers...{reset}")
@@ -105,15 +108,16 @@ class osintEye:
 	            for follower in response:
 	                results = {'ID': follower['id'],
    	                         'Node ID': follower['node_id'],
-   	                         'Profile photo': follower['avatar_url'],
+   	                         'Profile photo': self.urlshortener(follower['avatar_url']),
    	                         'Gravatar ID': follower['gravatar_id'],
    	                         'Account type': follower['type'],
-   	                         'Profile': follower['html_url'],
+   	                         'Profile': self.urlshortener(follower['html_url']),
    	                         'Is Site admin?': follower['site_admin'],
 	                }
 	                print(f"\n{white}{follower['login']}{reset}")
 	                for key,value in results.items():
 	                	print(f"{white}├─ {key}: {green}{value}{reset}")
+	                print("\n")
 	            
 	        # Repositories
 	        print(f"\n{white}[{green}*{white}] Fetching @{green}{args.username}{white}' Github repositories...{reset}")
@@ -160,10 +164,10 @@ class osintEye:
 	        for data in response['items']:
 	            results = {'ID': data['id'],
 	                       'Node ID': data['node_id'],
-	                       'Profile photo': data['avatar_url'],
-	                       'Gravatar ID': data['gravatar_id'],
+	                       'Profile photo': self.urlshortener(data['avatar_url']),
+	                       'Gravatar ID': self.urlshortener(data['gravatar_id']),
 	                       'Account type': data['type'],
-	                       'Profile': data['html_url'],
+	                       'Profile': self.urlshortener(data['html_url']),
 	                       'Is Site admin?': data['site_admin'],
 	                       'Score': data['score'],
 	            }
@@ -171,6 +175,7 @@ class osintEye:
 	            for key,value in results.items():
 	                print(f"{white}├─ {key}: {green}{value}{reset}")
 	            print(f"{white}={reset}"*100)
+	            
 	                
 	# Getting user's DockerHub profile information'              
 	def dockerhub(self):
@@ -182,8 +187,8 @@ class osintEye:
 	        pprint(response)
 	    else:
 	        data = {'ID': response['id'],
-	                'Profile': response['profile_url'],
-	                'Gravatar': response['gravatar_url'],
+	                'Profile': self.urlshortener(response['profile_url']),
+	                'Gravatar': self.urlshortener(response['gravatar_url']),
 	                'Username': response['username'],
 	                'Location': response['location'],
 	                'Account type': response['type'],
@@ -193,8 +198,12 @@ class osintEye:
 	        print(f"\n{white}{response['full_name']} ({green}DockerHub{white}){reset}")
 	        for key,value in data.items():
 	            print(f"{white}├─ {key}: {green}{value}{reset}")
-	        print(f"{white}={reset}"*100)
-	                    
+	        print(f"{white}={reset}"*100)	        
+	    
+	# Shorten url
+	def urlshortener(self,url):
+	    response = requests.get(f"http://tinyurl.com/api-create.php?url={url}")
+	    return response.text                    
 	
 	                                                          
 	               	   
