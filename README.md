@@ -23,7 +23,7 @@ A 👥user 🔎reconnaisance tool that extracts a ⭕target's information from I
 Clone project:
 
 ```
-git clone https:/github.com/rlyonheart/osinteye.git
+git clone https://github.com/rlyonheart/osinteye.git
 ```
 
 ```
