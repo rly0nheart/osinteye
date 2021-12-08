@@ -24,7 +24,7 @@ class osintEye:
 			self.dockerhub()
 		elif args.gsearch:
 			self.gsearch()
-		elif args.all:
+		else:
 			self.instagram()
 			self.github()
 			self.dockerhub()
@@ -40,10 +40,19 @@ class osintEye:
 		if args.raw:
 			pprint(response['graphql']['user'])
 		else:
-		    info = {'Profile photo': self.urlshortener(user['profile_pic_url_hd']),
+		    # I personally think these were unnecessary but, why not? lol
+		    profile_pic_url = user['profile_pic_url_hd']
+		    external_url = user['external_url']
+		    # If -sU or --short-urls is passed, all urls in results will be shortened
+		    # This same logic will be applied to all results
+		    if args.urlshortener:
+		    	profile_pic_url = self.urlshortener(user['profile_pic_url_hd'])
+		    	external_url = self.urlshortener(user['external_url'])
+		    	
+		    info = {'Profile photo': profile_pic_url,
 		            'Username': user['username'],
 		            'User ID': user['id'],
-		            'External URL': self.urlshortener(user['external_url']),
+		            'External URL': external_url,
 		            'Bio': user['biography'],
 		            'Followers': user['edge_followed_by']['count'],
 		            'Following': user['edge_follow']['count'],
@@ -76,7 +85,11 @@ class osintEye:
 	    if args.raw:
 	    	pprint(response)
 	    else:
-	        info = {'Profile photo': self.urlshortener(response['avatar_url']),
+	        avatar_url = response['avatar_url']
+	        if args.urlshortener:
+	        	avatar_url = self.urlshortener(response['avatar_url'])
+	        	
+	        info = {'Profile photo': avatar_url,
 	                'Username': response['login'],
 	                'User ID': response['id'],
 	                'Node ID': response['node_id'],
@@ -106,12 +119,18 @@ class osintEye:
 	        	pprint(response)
 	        else:
 	            for follower in response:
+	                avatar_url = follower['avatar_url']
+	                profile_url = follower['html_url']
+	                if args.urlshortener:
+	                	avatar_url = self.urlshortener(follower['avatar_url'])
+	                	profile_url = self.urlshortener(follower['html_url'])
+	                	
 	                results = {'ID': follower['id'],
    	                         'Node ID': follower['node_id'],
-   	                         'Profile photo': self.urlshortener(follower['avatar_url']),
+   	                         'Profile photo': avatar_url,
    	                         'Gravatar ID': follower['gravatar_id'],
    	                         'Account type': follower['type'],
-   	                         'Profile': self.urlshortener(follower['html_url']),
+   	                         'Profile': profile_url,
    	                         'Is Site admin?': follower['site_admin'],
 	                }
 	                print(f"\n{white}{follower['login']}{reset}")
@@ -162,12 +181,17 @@ class osintEye:
 	        pprint(response)
 	    else:
 	        for data in response['items']:
+	            avatar_url = data['avatar_url']
+	            profile_url = data['html_url']
+	            if args.urlshortener:
+	            	avatar_url = self.urlshortener(data['avatar_url'])
+	            	profile_url = self.urlshortener(data['html_url'])
 	            results = {'ID': data['id'],
 	                       'Node ID': data['node_id'],
-	                       'Profile photo': self.urlshortener(data['avatar_url']),
-	                       'Gravatar ID': self.urlshortener(data['gravatar_id']),
+	                       'Profile photo': avatar_url,
+	                       'Gravatar ID': data['gravatar_id'],
 	                       'Account type': data['type'],
-	                       'Profile': self.urlshortener(data['html_url']),
+	                       'Profile': profile_url,
 	                       'Is Site admin?': data['site_admin'],
 	                       'Score': data['score'],
 	            }
@@ -186,9 +210,15 @@ class osintEye:
 	    if args.raw:
 	        pprint(response)
 	    else:
+	        profile_url = response['profile_url']
+	        gravatar_url = response['gravatar_url']
+	        if args.urlshortener:
+	        	profile_url = self.urlshortener(response['profile_url'])
+	        	gravatar_url = self.urlshortener(response['gravatar_url'])
+	        	
 	        data = {'ID': response['id'],
-	                'Profile': self.urlshortener(response['profile_url']),
-	                'Gravatar': self.urlshortener(response['gravatar_url']),
+	                'Profile': profile_url,
+	                'Gravatar': gravatar_url,
 	                'Username': response['username'],
 	                'Location': response['location'],
 	                'Account type': response['type'],
@@ -208,12 +238,12 @@ class osintEye:
 	                                                          
 	               	   
 parser = argparse.ArgumentParser(description=f"{white}osint{red}Eye{white}: is a user {green}reconaissance{white} tool user that extracts a target's information from {green}GitHub{white}, {green}Instagram{white} and {green}DockerHub{white}.  developed by {green}Richard Mwewa {white}| https://github.com/{green}rlyonheart{reset}")
-parser.add_argument("username",help=f"{white}[{green}USERNAME{white}] target username{reset}")
-parser.add_argument("-I","--instagram",dest="instagram",help=f"{white}[{green}INSTAGRAM{white}] get target's Instagram information{reset}",action="store_true")
-parser.add_argument("-G","--github",dest="github",help=f"{white}[{green}GITHUB{white}] get target's GitHub information{reset}",action="store_true")
-parser.add_argument("-D", "--dockerhub",dest="dockerhub",help=f"{white}[{green}DOCKERHUB{white}] get target's DockerHub information{reset}",action="store_true")
-parser.add_argument("-X", "--all",dest="all",help=f"{white}get target's information from all available sources{reset}",action="store_true")
-parser.add_argument("-sG", "--github-search", dest="gsearch",help=f"{green}search{white} a username on github and get related results{reset} ", action="store_true")
-parser.add_argument("-r","--raw",dest="raw",help=f"{white}return output in raw {green}json{white} format{reset}",action="store_true")
-parser.add_argument("-v", "--verbose", help=f"{white}run osint{red}Eye{white} in verbose mode{reset}", dest="verbose", action="store_true")
+parser.add_argument("username",help=f"{white}[{green}REQUIRED{white}] target username{reset}")
+parser.add_argument("-sU","--shorten-urls",dest="urlshortener",help=f"{white}[{green}OPTIONAL{white}] if passed, all urls in results will be shortened{reset}",action="store_true")
+parser.add_argument("-I","--instagram",dest="instagram",help=f"{white}[{green}OPTIONAL{white}] get target's Instagram information{reset}",action="store_true")
+parser.add_argument("-G","--github",dest="github",help=f"{white}[{green}OPTIONAL{white}] get target's GitHub information{reset}",action="store_true")
+parser.add_argument("-D", "--dockerhub",dest="dockerhub",help=f"{white}[{green}OPTIONAL{white}] get target's DockerHub information{reset}",action="store_true")
+parser.add_argument("-sG", "--github-search", dest="gsearch",help=f"{white}[{green}OPTIONAL{white}] search a username on github and get related results{reset} ", action="store_true")
+parser.add_argument("-r","--raw",dest="raw",help=f"{white}[{green}OPTIONAL{white}] return output in raw {green}json{white} format{reset}",action="store_true")
+parser.add_argument("-v", "--verbose", help=f"{white}[{green}RECOMMENDED{white}] run osint{red}Eye{white} in verbose mode{reset}", dest="verbose", action="store_true")
 args = parser.parse_args()
