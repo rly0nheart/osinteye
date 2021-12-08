@@ -58,23 +58,22 @@ python osinteye -v --instagram johndoe
 ./osinteye -v --instagram johndoe
 ```
 
+> **Note**: *If no sitename is specified, osintEye will search for the username on all available sites by default*
+
 # Available Sources
 * Instagram
 * DockerHub
 * Github
 
+# Optional Arguments
 | Flag        | Usage |
 | ------------- |:---------:|
-| <code>-I/--instagram</code> |  *get target's Instagram information*  |
-| <code>-G/--github</code> |  *get target's Github information*  |
-| <code>-D/--dockerhub</code> |  *get target's DockerHub information*  |
-| <code>-X/--all</code> |  *get target's information from all available sources*  |
-
-# Optional Arguments
-| Flag         | Usage|
-| ------------- |:---------:|
-| <code>-sG/--github-search</code> | *search username on Github* |
+| <code>-I/--instagram</code> |  *[OPTIONAL] get target's Instagram information*  |
+| <code>-G/--github</code> |  *[OPTIONAL] get target's Github information*  |
+| <code>-D/--dockerhub</code> |  *[OPTIONAL] get target's DockerHub information*  |
+| <code>-sG/--github-search</code> | *[OPTIONAL] search username on Github* |
 | <code>-r/--raw</code> | *[OPTIONAL] return output in raw json format*  |
+| <code>-sU/--shorten-urls</code> |  *[OPTIONAL] if passed, all urls in results will be shortened*  |
 | <code>-v/--verbose</code>  | *[RECOMMENDED] run osintEye in verbose mode (returns network logs, errors and warnings)*  |
 
 
@@ -85,10 +84,10 @@ The author [Richard Mwewa](https://about.me/rlyonheart) will not be responsible 
 # LICENSE
 ![license](https://user-images.githubusercontent.com/74001397/137917929-2f2cdb0c-4d1d-4e4b-9f0d-e01589e027b5.png)
 
-# About author
+# About me
 * [About.me](https://about.me/rlyonheart)
 
-# Contact author
+# Contact me
 * [Github](https://github.com/rlyonheart)
 
 * [Twitter](https://twitter.com/rly0nheart)
