@@ -23,39 +23,39 @@ A 👥user 🔎reconnaisance tool that extracts a information from About.me, Ins
 Clone project:
 
 ```
-git clone https://github.com/rly0nheart/osinteye.git
+$ git clone https://github.com/rly0nheart/osinteye.git
 ```
 
 ```
-cd osinteye
+$ cd osinteye
 ```
 
 ```
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
 # Usage
 ```
-python osinteye [SITENAME] [USERNAME]
+$ python osinteye [SITENAME] [USERNAME]
 ```
 
 **Or give osintEye execution permission**:
 ```
-chmod +x osinteye
+$ chmod +x osinteye
 ```
 
 ```
-./osinteye --[SITENAME] [USERNAME]
+$ ./osinteye --[SITENAME] [USERNAME]
 ```
 
 **Example 1.1**;
 ```
-python osinteye --instagram username
+$ python osinteye --instagram username
 ```
 
 **Example 1.2**;
 ```
-./osinteye --instagram username
+$ ./osinteye --instagram username
 ```
 
 # Available Sources
