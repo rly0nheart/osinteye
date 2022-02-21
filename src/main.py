@@ -1,20 +1,17 @@
 #!/usr/bin/env python3
 
 import logging
-import random
 import argparse
 import requests
-from bs4 import BeautifulSoup
 from datetime import datetime
-from lib.headers import user_agents
 from lib.colors import red,green,white,reset
-from src import about_me,instagram,github,dockerhub
+from plugins import pypi,about_me,instagram,github,dockerhub
 
 
 class osintEye:
 	def __init__(self,args):
 		self.session = requests.session()
-		self.session.headers = {'User-Agent': f'{random.choice(user_agents)}'}
+		self.session.headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15'}
 		
 		if args.about:
 			self.url = f'https://about.me/{args.username}'
@@ -24,6 +21,8 @@ class osintEye:
 			self.url = f'https://api.github.com/users/{args.username}'
 		elif args.dockerhub:
 			self.url = f'https://hub.docker.com/v2/users/{args.username}'
+		elif args.pypi:
+			self.url = f'https://pypi.org/user/{args.username}'
 		
 	def main(self):
 		if args.about:
@@ -34,19 +33,22 @@ class osintEye:
 			github.github(self,args)
 		elif args.dockerhub:
 			dockerhub.dockerhub(self)
+		elif args.pypi:
+			pypi.pypi(self,args)
 		else:
-		    exit(f'{white}osint{red}eye{white}: use {green}-h{white} or {green}--help{white} to view help message.{reset}')
+		    exit(f'{white}osint{red}Eye{white}: use {green}-h{white} or {green}--help{white} to show help message.{reset}')
 	                                                          
 
-start_time = datetime.now()	               	   
-parser = argparse.ArgumentParser(description=f'{white}Username reconnaisance tool{reset}',epilog=f'{white}osint{red}Eye{white}  extracts a target\'s information from {green}About.me{white}, {green}Instagram{white}, {green}Github{white}, and {green}Dockerhub{white}.  developed by {green}Richard Mwewa {white}| https://github.com/{green}rly0nheart{reset}')
-parser.add_argument('username',help=f'{white}[{green}REQUIRED{white}] target username{reset}')
-parser.add_argument('--about',action='store_true')
-parser.add_argument('--instagram',help=f'{white}[{green}OPTIONAL{white}] get target\'s Instagram information{reset}',action='store_true')
-parser.add_argument('--github',help=f'{white}[{green}OPTIONAL{white}] get target\'s GitHub information{reset}',action='store_true')
-parser.add_argument('--dockerhub',help=f'{white}[{green}OPTIONAL{white}] get target\'s DockerHub information{reset}',action='store_true')
-parser.add_argument('-v', '--verbose', help=f'{white}[{green}RECOMMENDED{white}] enable verbosity{reset}', dest='verbose', action='store_true')
-parser.add_argument('--version',version=f'{white}2022.1.0.0 released on 29th January 2022{reset}',action='version')
+parser = argparse.ArgumentParser(description=f'{white}Username enumeration & reconnaissance suite{reset}',epilog=f'{white}osint{red}Eye{white}  is a username enumeration & reconnaisance suite that extracts a target\'s information from  {green}About.me{white}, {green}PyPI{white}, {green}Instagram{white}, {green}Github{white}, and {green}Dockerhub{white}.  Developed by Richard Mwewa | https://github.com/{green}rly0nheart{reset}')
+parser.add_argument('username',help=f'target username')
+parser.add_argument('--pypi',help='search on pypi',action='store_true')
+parser.add_argument('--about',help='search on about.me',action='store_true')
+parser.add_argument('--github',help='search on github',action='store_true')
+parser.add_argument('--instagram',help='search on instagram',action='store_true')
+parser.add_argument('--dockerhub',help='search on dockerhub',action='store_true')
+parser.add_argument('-v', '--verbose', help='enable verbosity',action='store_true')
+parser.add_argument('--version',version=f'v1.1.0 released on 21st February 2022',action='version')
 args = parser.parse_args()
+start_time = datetime.now()
 if args.verbose:
     logging.basicConfig(format=f"{white}[{green}*{white}] %(message)s{reset}",level=logging.DEBUG)
