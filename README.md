@@ -16,7 +16,7 @@
 
 
 # Installation
-![installation](https://user-images.githubusercontent.com/74001397/143138986-c0cf6065-942b-4276-b917-c0bfb17b2a9d.gif)
+> ![osinteye](https://user-images.githubusercontent.com/74001397/155046090-ac5c4943-d8bb-46e2-8dd3-21f94338febf.gif)
 
 Clone project:
 
