@@ -10,6 +10,7 @@
 # Supported sites
 * PyPI
 * Github
+* TestPypi
 * About.me
 * Instagram
 * DockerHub
@@ -60,6 +61,7 @@ $ ./osinteye --instagram [USERNAME]
 | Flag        | Usage |
 | ------------- |:---------:|
 | <code>--pypi</code> |  *get target's information from pypi*  |
+| <code>--testpypi</code> |  *get target's information from testpypi*  |
 | <code>--about</code> |  *get target's information from about.me*  |
 | <code>--instagram</code> |  *get target's information from instagram*  |
 | <code>--github</code> |  *get target's information from github*  |
