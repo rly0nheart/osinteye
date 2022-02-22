@@ -3,8 +3,8 @@
 ![GitHub](https://img.shields.io/github/license/rly0nheart/osinteye?style=flat&logo=github)
 ![GitHub repo size](https://img.shields.io/github/repo-size/rly0nheart/osinteye?style=flat&logo=github)
 
-Username enumeration & reconnaisance suite
-![osinteye](https://user-images.githubusercontent.com/74001397/143137199-d3545457-7b78-48d5-9d9d-e6d2623b4a47.gif)
+> Username enumeration & reconnaisance suite
+![osinteye](https://user-images.githubusercontent.com/74001397/155044129-24ace3c3-5ffb-407d-a49a-2c3f5c4da479.gif)
 
 
 # Supported sites
