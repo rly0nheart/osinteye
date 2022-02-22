@@ -48,12 +48,12 @@ $ ./osinteye [--SITENAME] [USERNAME]
 
 **Example 1.1**;
 ```
-$ python osinteye --instagram [username]
+$ python osinteye --instagram [USERNAME]
 ```
 
 **Example 1.2**;
 ```
-$ ./osinteye --instagram [username]
+$ ./osinteye --instagram [USERNAME]
 ```
 
 # Optional Arguments
