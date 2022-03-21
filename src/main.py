@@ -40,10 +40,10 @@ class osintEye:
 		elif args.testpypi:
 			testpypi.testpypi(self,args)
 		else:
-		    exit(f'{white}osint{red}Eye{white}: use {green}-h{white} or {green}--help{white} to show help message.{reset}')
+		    exit(f'{white}osint{red}eye{white}: use {green}-h{white} or {green}--help{white} to show usage.{reset}')
 	                                                          
 
-parser = argparse.ArgumentParser(description=f'{white}Username enumeration & reconnaissance suite{reset}',epilog=f'{white}osint{red}Eye{white}  is a username enumeration & reconnaisance suite that extracts a target\'s information as it appears online{white}.  Developed by Richard Mwewa | https://github.com/{green}rly0nheart{reset}')
+parser = argparse.ArgumentParser(description=f'{white}osinteye — by Richard Mwewa | https://about.me/rly0nheart{reset}',epilog=f'{white}osint{red}eye{white}  is a username enumeration & reconnaisance suite that extracts a target\'s information as it appears online.{reset}')
 parser.add_argument('username',help=f'target username')
 parser.add_argument('--pypi',help='search on pypi',action='store_true')
 parser.add_argument('--testpypi',help='search on testpypi',action='store_true')
@@ -52,7 +52,7 @@ parser.add_argument('--github',help='search on github',action='store_true')
 parser.add_argument('--instagram',help='search on instagram',action='store_true')
 parser.add_argument('--dockerhub',help='search on dockerhub',action='store_true')
 parser.add_argument('-v', '--verbose', help='enable verbosity',action='store_true')
-parser.add_argument('--version',version=f'v1.2.0 released on 21st February 2022',action='version')
+parser.add_argument('--version',version=f'v1.3.0 Released on 21st March 2022',action='version')
 args = parser.parse_args()
 start_time = datetime.now()
 if args.verbose:
