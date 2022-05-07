@@ -8,12 +8,12 @@
 
 
 # Supported sites
-* PyPI
-* Github
-* TestPypi
-* About.me
-* Instagram
-* DockerHub
+- [X] PyPI
+- [X] Github
+- [X] TestPypi
+- [X] About.me
+- [X] Instagram
+- [X] DockerHub
 
 
 # Installation
