@@ -1,3 +1,4 @@
+## This will not receive any further updates. Instagram is deprecated, so I decided to just archive it.
 ![Python Version](https://img.shields.io/badge/python-3.x-blue?style=flat&logo=python)
 ![OS](https://img.shields.io/badge/OS-GNU%2FLinux-red?style=flat&logo=linux)
 ![GitHub](https://img.shields.io/github/license/rly0nheart/osinteye?style=flat&logo=github)
